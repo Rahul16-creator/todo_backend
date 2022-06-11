@@ -21,3 +21,6 @@ const requestHandler = function (method, ...args) {
       });
   };
 };
+
+
+module.exports=requestHandler;
