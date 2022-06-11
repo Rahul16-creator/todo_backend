@@ -23,8 +23,8 @@ class TodoListService {
   createTodoList = (requestData) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const { name } = requestData;
-        await TodoList.create({ name });
+        const { name, uuid = null, completed = false } = requestData;
+        await TodoList.create({ name, uuid, completed });
         resolve({
           message: "TodoList Successfully created ||",
         });
@@ -43,7 +43,7 @@ class TodoListService {
       try {
         await TodoList.destroy({
           where: {
-            id,
+            uuid: id,
           },
         });
         resolve({
@@ -62,12 +62,12 @@ class TodoListService {
   updateTodoList = (id, requestData) => {
     return new Promise(async (resolve, reject) => {
       try {
-        await TodoList.update(requestData, { where: { id } });
+        await TodoList.update(requestData, { where: { uuid: id } });
         resolve({
-            message: "TodoList Successfully Updated. ||",
-          });
+          message: "TodoList Successfully Updated. ||",
+        });
       } catch (error) {
-          console.log(error);
+        console.log(error);
         reject({
           status: false,
           code: 400,

@@ -1,2 +1,2 @@
 const TodoList=require("./TodoList");
-TodoList.sync();
+TodoList.sync({force:true});
