@@ -1,6 +1,6 @@
-const { reject } = require("lodash");
 const TodoList = require("../models/TodoList");
-
+const errorCodes = require("../utils/ErrorCodes");
+const logger = require("../utils/logger");
 class TodoListService {
   getAllTodoLists = () => {
     return new Promise(async (resolve, reject) => {
@@ -11,11 +11,15 @@ class TodoListService {
           data: todolists,
         });
       } catch (error) {
-        reject({
-          status: false,
-          code: 400,
-          message: "Error in fetching All todo list from Db",
+        logger.Log({
+          level: logger.LEVEL.ERROR,
+          component: "service/TodoLists.js",
+          code: "fetching All todo list",
+          description: "Error in fetching All todo list from Db",
+          category: "",
+          ref: {},
         });
+        reject(errorCodes["TODO_FETCH_ALL_ERROR"]);
       }
     });
   };
@@ -29,11 +33,15 @@ class TodoListService {
           message: "TodoList Successfully created ||",
         });
       } catch (error) {
-        reject({
-          status: false,
-          code: 400,
-          message: "Error in creating todo list",
+        logger.Log({
+          level: logger.LEVEL.ERROR,
+          component: "service/TodoLists.js",
+          code: "Creating todo list",
+          description: "Error in creating todo list",
+          category: "",
+          ref: {},
         });
+        reject(errorCodes["TODO_CREATE_ERROR"]);
       }
     });
   };
@@ -50,11 +58,15 @@ class TodoListService {
           message: "TodoList Successfully deleted ||",
         });
       } catch (error) {
-        reject({
-          status: false,
-          code: 400,
-          message: "Error in deleting todo list",
+        logger.Log({
+          level: logger.LEVEL.ERROR,
+          component: "service/TodoLists.js",
+          code: "Deleting todo list",
+          description: "Error in deleting todo list",
+          category: "",
+          ref: {},
         });
+        reject(errorCodes["TODO_DELETE_ERROR"]);
       }
     });
   };
@@ -67,12 +79,15 @@ class TodoListService {
           message: "TodoList Successfully Updated. ||",
         });
       } catch (error) {
-        console.log(error);
-        reject({
-          status: false,
-          code: 400,
-          message: "Error in Updating todo list",
+        logger.Log({
+          level: logger.LEVEL.ERROR,
+          component: "service/TodoLists.js",
+          code: "Updating todo list",
+          description: "Error in Updating todo list",
+          category: "",
+          ref: {},
         });
+        reject(errorCodes["TODO_UPDATE_ERROR"]);
       }
     });
   };
