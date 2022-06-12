@@ -35,11 +35,7 @@ app.use((err,req,res,next)=>{
 })
 
 app.use("*", (req, res) => {
-  res.status(404).send({
-      status: false,
-      code: 404,
-      message: `Path ${req.originalUrl} not found!!`,
-    });
+  res.status(404).send(errorCodes["NOT_FOUND"]);
 });
 
 app.listen(PORT, () => {
